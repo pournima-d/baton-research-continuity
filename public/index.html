@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BATON — Research Continuity Platform</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- Top Institutional Workspace Bar -->
+  <header class="topbar" role="banner">
+    <div class="topbar-brand">
+      <span class="brand-mark">BATON</span>
+      <span class="brand-divider">/</span>
+      <span class="brand-subtitle">Research Continuity Workspace</span>
+    </div>
+
+    <div class="topbar-controls">
+      <div class="control-group">
+        <label for="project-select" class="control-label">Project</label>
+        <select id="project-select" class="control-select" aria-label="Select Project"></select>
+      </div>
+
+      <div class="control-group">
+        <label for="persona-select" class="control-label">Active Role / Session</label>
+        <select id="persona-select" class="control-select" aria-label="Switch Authenticated User Persona"></select>
+      </div>
+
+      <span id="active-role-badge" class="badge badge-role" title="Server-enforced RBAC role">—</span>
+
+      <button id="btn-refresh-workspace" type="button" class="btn btn-secondary btn-sm" title="Reload all data from backend API">
+        Refresh Data
+      </button>
+
+      <button id="btn-seed-demo" type="button" class="btn btn-outline btn-sm" title="Explicitly reset database to synthetic demo seed (kept separate from normal operation)">
+        Reset Demo Seed
+      </button>
+    </div>
+  </header>
+
+  <!-- Global Notification / Error Banner -->
+  <div id="global-alert" class="global-alert hidden" role="alert" aria-live="polite">
+    <span id="global-alert-text"></span>
+    <button id="global-alert-close" type="button" class="alert-close" aria-label="Dismiss message">&times;</button>
+  </div>
+
+  <!-- Main Workspace Layout -->
+  <div class="workspace-shell">
+    <!-- Left Navigation Rail -->
+    <nav class="sidebar-nav" aria-label="Project Navigation">
+      <div class="nav-section-label">Continuity Views</div>
+      <ul class="nav-list" role="tablist">
+        <li>
+          <button type="button" class="nav-item active" data-tab="overview" role="tab" aria-selected="true">
+            <span class="nav-step">00</span>
+            <span class="nav-title">Overview</span>
+            <span id="nav-badge-overview" class="nav-count"></span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="nav-item" data-tab="sources" role="tab" aria-selected="false">
+            <span class="nav-step">01</span>
+            <span class="nav-title">Sources</span>
+            <span id="nav-badge-sources" class="nav-count">0</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="nav-item" data-tab="continuity-map" role="tab" aria-selected="false">
+            <span class="nav-step">02</span>
+            <span class="nav-title">Continuity Map</span>
+            <span id="nav-badge-map" class="nav-count">0</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="nav-item" data-tab="records" role="tab" aria-selected="false">
+            <span class="nav-step">03</span>
+            <span class="nav-title">Records &amp; Evidence</span>
+            <span id="nav-badge-records" class="nav-count">0</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="nav-item" data-tab="review-queue" role="tab" aria-selected="false">
+            <span class="nav-step">04</span>
+            <span class="nav-title">Review Queue</span>
+            <span id="nav-badge-reviews" class="nav-count">0</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="nav-item" data-tab="handover" role="tab" aria-selected="false">
+            <span class="nav-step">05</span>
+            <span class="nav-title">Handover</span>
+            <span id="nav-badge-handover" class="nav-count">—</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="nav-item" data-tab="audit" role="tab" aria-selected="false">
+            <span class="nav-step">06</span>
+            <span class="nav-title">Activity / Audit</span>
+            <span id="nav-badge-audit" class="nav-count"></span>
+          </button>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="session-summary">
+          <div class="session-label">Authenticated Identity</div>
+          <div id="sidebar-user-name" class="session-user">—</div>
+          <div id="sidebar-user-email" class="session-email">—</div>
+          <div id="sidebar-user-dept" class="session-dept">—</div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Primary Content Area -->
+    <main class="main-content" id="main-content">
+      <!-- Loading Overlay -->
+      <div id="workspace-loading" class="loading-state hidden">
+        Loading project data from BATON API...
+      </div>
+
+      <!-- SCREEN 1: OVERVIEW (Project Dashboard) -->
+      <section id="view-overview" class="view-panel" aria-labelledby="heading-overview">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Project Dashboard</div>
+            <h1 id="heading-overview" class="panel-title">—</h1>
+            <p id="overview-description" class="panel-subtitle">—</p>
+          </div>
+          <div class="header-meta">
+            <span id="overview-status-badge" class="badge">—</span>
+            <span id="overview-slug" class="mono-tag">—</span>
+          </div>
+        </div>
+
+        <!-- Five-Stage Workflow Bar -->
+        <div class="workflow-strip" aria-label="Five-Stage Workflow Progress">
+          <button type="button" class="workflow-stage-btn" data-goto="sources">
+            <span class="stage-num">Stage 1 · Connect</span>
+            <span id="wf-connect-stat" class="stage-stat">0 Sources</span>
+          </button>
+          <button type="button" class="workflow-stage-btn" data-goto="continuity-map">
+            <span class="stage-num">Stage 2 · Reconstruct</span>
+            <span id="wf-reconstruct-stat" class="stage-stat">0 Records</span>
+          </button>
+          <button type="button" class="workflow-stage-btn" data-goto="records">
+            <span class="stage-num">Stage 3 · Verify</span>
+            <span id="wf-verify-stat" class="stage-stat">0 Verified</span>
+          </button>
+          <button type="button" class="workflow-stage-btn" data-goto="review-queue">
+            <span class="stage-num">Stage 4 · Review</span>
+            <span id="wf-review-stat" class="stage-stat">0 Pending</span>
+          </button>
+          <button type="button" class="workflow-stage-btn" data-goto="handover">
+            <span class="stage-num">Stage 5 · Handover</span>
+            <span id="wf-handover-stat" class="stage-stat">NONE</span>
+          </button>
+        </div>
+
+        <!-- API-Backed KPI Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-label">Connected Sources</div>
+            <div id="metric-sources" class="metric-value">0</div>
+            <div id="metric-sources-sub" class="metric-sub">API-backed count</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Continuity Records</div>
+            <div id="metric-records" class="metric-value">0</div>
+            <div id="metric-records-sub" class="metric-sub">Extracted &amp; manual items</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Open Loops &amp; Gaps</div>
+            <div id="metric-open-loops" class="metric-value">0</div>
+            <div class="metric-sub">Risks, tasks, questions, or weak evidence</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Pending Reviews</div>
+            <div id="metric-pending-reviews" class="metric-value">0</div>
+            <div class="metric-sub">Awaiting PI / Reviewer sign-off</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Handover Status</div>
+            <div id="metric-handover-status" class="metric-value">—</div>
+            <div id="metric-handover-sub" class="metric-sub">No package created yet</div>
+          </div>
+        </div>
+
+        <div class="split-grid">
+          <!-- Recent Activity Feed -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Recent Project Activity</h2>
+              <button type="button" class="btn btn-outline btn-xs" data-goto="audit">View Full Log</button>
+            </div>
+            <div id="overview-activity-list" class="activity-list"></div>
+          </div>
+
+          <!-- Project Memberships & Create Project -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Project Memberships &amp; Roles</h2>
+              <span class="text-muted text-xs">Enforced in backend API</span>
+            </div>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Member</th>
+                    <th>Department</th>
+                    <th>Role</th>
+                  </tr>
+                </thead>
+                <tbody id="overview-members-tbody"></tbody>
+              </table>
+            </div>
+
+            <form id="form-add-member" class="compact-form border-top">
+              <div class="form-title">Assign / Update Member Role</div>
+              <div id="member-form-permission-note" class="permission-note hidden"></div>
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="member-user-select">User</label>
+                  <select id="member-user-select" required></select>
+                </div>
+                <div class="form-field">
+                  <label for="member-role-select">Role</label>
+                  <select id="member-role-select" required>
+                    <option value="PI_LEAD">PI_LEAD</option>
+                    <option value="RESEARCHER">RESEARCHER</option>
+                    <option value="REVIEWER">REVIEWER</option>
+                    <option value="INCOMING_MEMBER">INCOMING_MEMBER</option>
+                    <option value="AUDITOR">AUDITOR</option>
+                  </select>
+                </div>
+                <div class="form-field form-field-btn">
+                  <button id="btn-submit-member" type="submit" class="btn btn-primary btn-sm">Assign Role</button>
+                </div>
+              </div>
+            </form>
+
+            <form id="form-create-project" class="compact-form border-top">
+              <div class="form-title">Create New Continuity Project</div>
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="new-project-name">Project Name</label>
+                  <input id="new-project-name" type="text" placeholder="e.g., Perovskite Tandem Encapsulation Study" required />
+                </div>
+                <div class="form-field">
+                  <label for="new-project-desc">Scope / Continuity Goal</label>
+                  <input id="new-project-desc" type="text" placeholder="Baseline protocols, degradation logs, and handover checklist" required />
+                </div>
+                <div class="form-field form-field-btn">
+                  <button id="btn-create-project" type="submit" class="btn btn-secondary btn-sm">Create Project</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 2: SOURCES (Stage 1 — Connect) -->
+      <section id="view-sources" class="view-panel hidden" aria-labelledby="heading-sources">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Stage 1 · Connect</div>
+            <h1 id="heading-sources" class="panel-title">Research Sources &amp; Provenance Spans</h1>
+            <p class="panel-subtitle">
+              Ingest research documents, lab notebooks, and experimental datasets. Each source is indexed into exact page, section/line, or row/record provenance spans.
+            </p>
+          </div>
+          <div id="sources-restricted-banner" class="restricted-notice hidden"></div>
+        </div>
+
+        <div class="split-grid">
+          <!-- Source Upload Card -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Upload &amp; Index Research Source</h2>
+              <div class="template-buttons">
+                <button type="button" class="btn btn-outline btn-xs" id="btn-fill-sample-note">Load Sample Note</button>
+                <button type="button" class="btn btn-outline btn-xs" id="btn-fill-sample-csv">Load Sample CSV</button>
+              </div>
+            </div>
+
+            <div id="upload-permission-note" class="permission-note hidden"></div>
+
+            <form id="form-upload-source" class="stack-form">
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="src-title">Source Title *</label>
+                  <input id="src-title" type="text" placeholder="e.g., Symmetric Cell Critical Current Density Log" required />
+                </div>
+                <div class="form-field">
+                  <label for="src-format">Supported Format *</label>
+                  <select id="src-format" required>
+                    <option value="PDF_DOCUMENT">PDF_DOCUMENT ([PAGE N] / Paragraphs)</option>
+                    <option value="LAB_NOTE">LAB_NOTE (Markdown Sections &amp; Line Numbers)</option>
+                    <option value="CSV_DATASET">CSV_DATASET (Header + Row &amp; Record Key)</option>
+                    <option value="JSON_RECORDS">JSON_RECORDS (Structured Array / Keyed Objects)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="src-file-input">Select Local File (Optional helper)</label>
+                  <input id="src-file-input" type="file" accept=".txt,.md,.csv,.json,.pdf" />
+                </div>
+                <div class="form-field">
+                  <label for="src-filename">Sanitized File Name *</label>
+                  <input id="src-filename" type="text" placeholder="e.g., ccd_experiment_oct.csv" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="src-visibility">Access / Visibility Level *</label>
+                  <select id="src-visibility">
+                    <option value="PROJECT_SHARED">PROJECT_SHARED (Accessible to project team)</option>
+                    <option value="RESTRICTED_PI_ONLY">RESTRICTED_PI_ONLY (PI-only; excluded from AI &amp; Handover)</option>
+                  </select>
+                </div>
+                <div class="form-field checkbox-field">
+                  <label class="checkbox-label">
+                    <input id="src-exclude-ai" type="checkbox" />
+                    <span>Exclude source from AI reconstruction prompts</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="src-content">Source Content / Extracted Text Payload *</label>
+                <textarea id="src-content" rows="6" placeholder="Paste or load source content here..." required></textarea>
+              </div>
+
+              <!-- Upload Progress, Processing State, Error & Retry Box -->
+              <div id="upload-status-box" class="status-box hidden" role="status">
+                <div class="status-box-row">
+                  <strong id="upload-status-label">Idle</strong>
+                  <span id="upload-status-detail" class="text-xs"></span>
+                </div>
+                <div class="progress-track">
+                  <div id="upload-progress-bar" class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div id="upload-retry-wrap" class="hidden" style="margin-top: 8px;">
+                  <button id="btn-retry-upload" type="button" class="btn btn-secondary btn-xs">Retry Upload</button>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button id="btn-submit-source" type="submit" class="btn btn-primary">Upload &amp; Index Provenance Spans</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Provenance Span Inspector Card -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Provenance Span Inspector</h2>
+              <span id="inspector-source-badge" class="mono-tag">Select a source below</span>
+            </div>
+            <div id="span-inspector-body" class="span-inspector-body">
+              <div class="empty-state">Select "Inspect Spans" on any connected source to view its exact page, section/line, or CSV/JSON row locators.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connected Sources Table -->
+        <div class="card" style="margin-top: 16px;">
+          <div class="card-header">
+            <h2 class="card-title">Connected Project Sources</h2>
+            <span id="sources-count-label" class="text-muted text-xs">0 sources</span>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Title &amp; File</th>
+                  <th>Format</th>
+                  <th>Visibility &amp; AI Gate</th>
+                  <th>Processing State</th>
+                  <th>Spans</th>
+                  <th>Uploaded By</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="sources-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 3: CONTINUITY MAP (Stage 2 — Reconstruct) -->
+      <section id="view-continuity-map" class="view-panel hidden" aria-labelledby="heading-map">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Stage 2 · Reconstruct</div>
+            <h1 id="heading-map" class="panel-title">Continuity Map &amp; Pre-Filtered Reconstruction</h1>
+            <p class="panel-subtitle">
+              Deterministic SQL filtering removes restricted or AI-excluded sources before extraction. Proposed records are linked to exact source spans.
+            </p>
+          </div>
+        </div>
+
+        <!-- Reconstruction Control Bar -->
+        <div class="card" style="margin-bottom: 16px;">
+          <div class="card-header">
+            <h2 class="card-title">Run Structured Reconstruction Over Permitted Sources</h2>
+            <span class="badge badge-info">Pre-AI Access Filter Active</span>
+          </div>
+          <div id="reconstruct-permission-note" class="permission-note hidden"></div>
+          <form id="form-reconstruct" class="stack-form">
+            <div class="form-field">
+              <label>Select Project Sources to Include in Extraction Scope</label>
+              <div id="reconstruct-source-checkboxes" class="checkbox-grid"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-field" style="flex: 2;">
+                <label for="reconstruct-focus">Extraction Focus / Prompt Guidance</label>
+                <input id="reconstruct-focus" type="text" value="Extract research objectives, protocol decisions, experimental results, dependencies, and unresolved risks/gaps." />
+              </div>
+              <div class="form-field form-field-btn">
+                <button id="btn-run-reconstruct" type="submit" class="btn btn-primary">
+                  Run Pre-Filtered Reconstruction
+                </button>
+              </div>
+            </div>
+          </form>
+          <div id="reconstruct-filter-result" class="status-box hidden" style="margin-top: 12px;"></div>
+        </div>
+
+        <!-- Continuity Map Filters & Accessible View Switcher -->
+        <div class="filter-bar">
+          <div class="filter-group">
+            <label for="map-filter-type">Type</label>
+            <select id="map-filter-type">
+              <option value="ALL">All Types</option>
+              <option value="OBJECTIVE">OBJECTIVE</option>
+              <option value="DECISION">DECISION</option>
+              <option value="EXPERIMENT">EXPERIMENT</option>
+              <option value="RESULT">RESULT</option>
+              <option value="TASK">TASK</option>
+              <option value="RISK">RISK</option>
+              <option value="DEPENDENCY">DEPENDENCY</option>
+              <option value="QUESTION">QUESTION</option>
+              <option value="CONTACT">CONTACT</option>
+              <option value="GAP">GAP</option>
+              <option value="RECURRING_PROBLEM">RECURRING_PROBLEM</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="map-filter-status">Evidence / Review Status</label>
+            <select id="map-filter-status">
+              <option value="ALL">All Statuses</option>
+              <option value="SUPPORTED">Evidence: SUPPORTED</option>
+              <option value="CONFLICTING">Evidence: CONFLICTING</option>
+              <option value="UNSUPPORTED">Evidence: UNSUPPORTED</option>
+              <option value="STALE">Evidence: STALE</option>
+              <option value="NEEDS REVIEW">Evidence: NEEDS REVIEW</option>
+              <option value="NOT ESTABLISHED">Evidence: NOT ESTABLISHED</option>
+              <option value="PARTIAL">Evidence: PARTIAL</option>
+              <option value="WEAK">Evidence: WEAK</option>
+              <option value="UNVERIFIED">Evidence: UNVERIFIED</option>
+              <option value="CONTRADICTED">Evidence: CONTRADICTED</option>
+              <option value="INCOMPLETE">Incomplete / Unknown Fields</option>
+              <option value="APPROVED">Review: APPROVED</option>
+              <option value="PENDING_REVIEW">Review: PENDING_REVIEW</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="map-filter-owner">Stated Owner</label>
+            <select id="map-filter-owner">
+              <option value="ALL">All Owners</option>
+              <option value="UNKNOWN">UNKNOWN (Not stated in source)</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="map-filter-source">Source</label>
+            <select id="map-filter-source">
+              <option value="ALL">All Sources</option>
+            </select>
+          </div>
+          <div class="filter-group" style="margin-left:auto;">
+            <button id="btn-map-view-nodes" type="button" class="btn btn-primary btn-xs">Node Map View</button>
+            <button id="btn-map-view-table" type="button" class="btn btn-outline btn-xs">Accessible Table View</button>
+          </div>
+        </div>
+
+        <!-- 4-Column Continuity Map -->
+        <div id="continuity-map-nodes-wrap" class="continuity-map-grid">
+          <div class="map-column">
+            <div class="map-col-header">
+              <h3>Objectives &amp; Decisions</h3>
+              <span id="map-count-obj" class="nav-count">0</span>
+            </div>
+            <div id="map-col-objectives" class="map-card-list"></div>
+          </div>
+
+          <div class="map-column">
+            <div class="map-col-header">
+              <h3>Experiments &amp; Results</h3>
+              <span id="map-count-exp" class="nav-count">0</span>
+            </div>
+            <div id="map-col-experiments" class="map-card-list"></div>
+          </div>
+
+          <div class="map-column">
+            <div class="map-col-header">
+              <h3>Open Work, Risks, Gaps &amp; Recurring</h3>
+              <span id="map-count-risk" class="nav-count">0</span>
+            </div>
+            <div id="map-col-risks" class="map-card-list"></div>
+          </div>
+
+          <div class="map-column">
+            <div class="map-col-header">
+              <h3>Dependencies &amp; Contacts</h3>
+              <span id="map-count-dep" class="nav-count">0</span>
+            </div>
+            <div id="map-col-dependencies" class="map-card-list"></div>
+          </div>
+        </div>
+
+        <!-- Accessible List / Table Alternative for Continuity Map -->
+        <div id="continuity-map-table-card" class="card hidden" style="margin-top: 12px;">
+          <div class="card-header">
+            <h3 class="card-title">Accessible Continuity Map Table Alternative</h3>
+            <span id="map-table-count" class="text-muted text-xs">0 nodes</span>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Title &amp; Direct Source Statement</th>
+                  <th>Stated Owner &amp; Date</th>
+                  <th>Evidence Status</th>
+                  <th>Review Status</th>
+                  <th>Flags (Conflict / Incomplete)</th>
+                  <th>Source Spans</th>
+                </tr>
+              </thead>
+              <tbody id="continuity-map-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Evidence-Backed Continuity Edges -->
+        <div id="continuity-edges-card" class="card" style="margin-top: 16px;">
+          <div class="card-header">
+            <h3 class="card-title">Evidence-Supported Continuity Map Edges (Relationships &amp; Conflicts)</h3>
+            <span id="continuity-edges-count" class="mono-tag">0 edges</span>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Relationship Type</th>
+                  <th>From Node</th>
+                  <th>To Node</th>
+                  <th>Evidence Rationale</th>
+                  <th>Supporting Span IDs</th>
+                </tr>
+              </thead>
+              <tbody id="continuity-edges-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 4: RECORDS & EVIDENCE (Stage 3 — Verify) -->
+      <section id="view-records" class="view-panel hidden" aria-labelledby="heading-records">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Stage 2 &amp; Stage 3 · Reconstruct &amp; Verify</div>
+            <h1 id="heading-records" class="panel-title">Continuity Records &amp; Evidence Verification</h1>
+            <p class="panel-subtitle">
+              Inspect extracted records, verify exact verbatim quotes against source spans, and classify categorical evidence status (no fabricated truth percentages).
+            </p>
+          </div>
+          <div>
+            <button id="btn-toggle-new-record" type="button" class="btn btn-primary btn-sm">+ Create Continuity Record</button>
+          </div>
+        </div>
+
+        <!-- Collapsible Create Record Card -->
+        <div id="card-create-record" class="card hidden" style="margin-bottom: 16px;">
+          <div class="card-header">
+            <h2 class="card-title">Create Manual Continuity Record</h2>
+            <button id="btn-close-new-record" type="button" class="btn btn-outline btn-xs">Close</button>
+          </div>
+          <div id="create-record-permission-note" class="permission-note hidden"></div>
+          <form id="form-create-record" class="stack-form">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="new-rec-type">Record Type *</label>
+                <select id="new-rec-type" required>
+                  <option value="OBJECTIVE">OBJECTIVE</option>
+                  <option value="DECISION">DECISION</option>
+                  <option value="EXPERIMENT">EXPERIMENT</option>
+                  <option value="RESULT">RESULT</option>
+                  <option value="TASK">TASK</option>
+                  <option value="RISK">RISK</option>
+                  <option value="DEPENDENCY">DEPENDENCY</option>
+                  <option value="QUESTION">QUESTION</option>
+                  <option value="CONTACT">CONTACT</option>
+                  <option value="GAP">GAP</option>
+                  <option value="RECURRING_PROBLEM">RECURRING_PROBLEM</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="new-rec-evidence-status">Initial Evidence Status *</label>
+                <select id="new-rec-evidence-status" required>
+                  <option value="SUPPORTED">SUPPORTED</option>
+                  <option value="CONFLICTING">CONFLICTING</option>
+                  <option value="UNSUPPORTED">UNSUPPORTED</option>
+                  <option value="STALE">STALE</option>
+                  <option value="NEEDS REVIEW">NEEDS REVIEW</option>
+                  <option value="NOT ESTABLISHED">NOT ESTABLISHED</option>
+                  <option value="UNVERIFIED">UNVERIFIED</option>
+                  <option value="WEAK">WEAK</option>
+                  <option value="PARTIAL">PARTIAL</option>
+                  <option value="CONTRADICTED">CONTRADICTED</option>
+                </select>
+              </div>
+              <div class="form-field" style="flex: 2;">
+                <label for="new-rec-title">Title *</label>
+                <input id="new-rec-title" type="text" placeholder="Concise summary of the finding, decision, or task" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="new-rec-statement">Detailed Continuity Statement *</label>
+                <textarea id="new-rec-statement" rows="2" placeholder="Exact specification, measurement, or open issue..." required></textarea>
+              </div>
+              <div class="form-field">
+                <label for="new-rec-rationale">Continuity Rationale</label>
+                <textarea id="new-rec-rationale" rows="2" placeholder="Why the incoming team member needs this record..."></textarea>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="new-rec-span">Link Provenance Span *</label>
+                <select id="new-rec-span" required></select>
+              </div>
+              <div class="form-field" style="flex: 2;">
+                <label for="new-rec-quote">Exact Verbatim Quote from Span *</label>
+                <input id="new-rec-quote" type="text" placeholder="Exact substring from the selected provenance span" required />
+              </div>
+            </div>
+            <div class="form-actions">
+              <button id="btn-submit-new-record" type="submit" class="btn btn-primary">Save Record &amp; Verify Quote</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <div class="filter-group">
+            <label for="filter-rec-type">Type</label>
+            <select id="filter-rec-type">
+              <option value="ALL">All Types</option>
+              <option value="OBJECTIVE">OBJECTIVE</option>
+              <option value="DECISION">DECISION</option>
+              <option value="EXPERIMENT">EXPERIMENT</option>
+              <option value="RESULT">RESULT</option>
+              <option value="TASK">TASK</option>
+              <option value="RISK">RISK</option>
+              <option value="DEPENDENCY">DEPENDENCY</option>
+              <option value="QUESTION">QUESTION</option>
+              <option value="CONTACT">CONTACT</option>
+              <option value="GAP">GAP</option>
+              <option value="RECURRING_PROBLEM">RECURRING_PROBLEM</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filter-evidence-status">Evidence Status</label>
+            <select id="filter-evidence-status">
+              <option value="ALL">All Evidence States</option>
+              <option value="SUPPORTED">SUPPORTED</option>
+              <option value="CONFLICTING">CONFLICTING</option>
+              <option value="UNSUPPORTED">UNSUPPORTED</option>
+              <option value="STALE">STALE</option>
+              <option value="NEEDS REVIEW">NEEDS REVIEW</option>
+              <option value="NOT ESTABLISHED">NOT ESTABLISHED</option>
+              <option value="PARTIAL">PARTIAL</option>
+              <option value="WEAK">WEAK</option>
+              <option value="UNVERIFIED">UNVERIFIED</option>
+              <option value="CONTRADICTED">CONTRADICTED</option>
+              <option value="BROKEN_PROVENANCE">BROKEN_PROVENANCE</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filter-approval-status">Review State</label>
+            <select id="filter-approval-status">
+              <option value="ALL">All Review States</option>
+              <option value="APPROVED">APPROVED</option>
+              <option value="PENDING_REVIEW">PENDING_REVIEW</option>
+              <option value="DRAFT">DRAFT</option>
+              <option value="NEEDS_REVISION">NEEDS_REVISION</option>
+              <option value="REJECTED">REJECTED</option>
+            </select>
+          </div>
+          <div class="filter-group" style="flex: 1;">
+            <label for="filter-search">Search</label>
+            <input id="filter-search" type="search" placeholder="Filter by title, summary, owner, or citation..." />
+          </div>
+        </div>
+
+        <!-- Records Table + Detail Split View -->
+        <div class="records-split-layout">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Continuity Records</h2>
+              <span id="records-table-count" class="text-muted text-xs">0 records</span>
+            </div>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Title &amp; Summary</th>
+                    <th>Owner &amp; Date</th>
+                    <th>Evidence Refs</th>
+                    <th>Evidence Status</th>
+                    <th>Review State</th>
+                  </tr>
+                </thead>
+                <tbody id="records-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Selected Record & Evidence Verification Panel -->
+          <div class="card" id="record-detail-panel">
+            <div class="card-header">
+              <h2 class="card-title">Record &amp; Evidence Inspector</h2>
+              <span id="detail-record-version" class="mono-tag">—</span>
+            </div>
+            <div id="record-detail-body" class="record-detail-body">
+              <div class="empty-state">Select a continuity record from the table to inspect its exact provenance spans, verify evidence status, or view version history.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 5: REVIEW QUEUE (Stage 4 — Review) -->
+      <section id="view-review-queue" class="view-panel hidden" aria-labelledby="heading-reviews">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Stage 4 · Review</div>
+            <h1 id="heading-reviews" class="panel-title">Governance Review Queue</h1>
+            <p class="panel-subtitle">
+              Human approval governs whether a record may enter a handover package. Approval never upgrades weak or unverified evidence into strong evidence.
+            </p>
+          </div>
+          <span class="badge badge-governance">Invariant: Evidence Status ≠ Approval State</span>
+        </div>
+
+        <div id="review-role-banner" class="permission-note"></div>
+
+        <div id="review-queue-list" class="review-queue-list"></div>
+      </section>
+
+      <!-- SCREEN 6: HANDOVER VIEW (Stage 5 — Handover) -->
+      <section id="view-handover" class="view-panel hidden" aria-labelledby="heading-handover">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Stage 5 · Handover</div>
+            <h1 id="heading-handover" class="panel-title">Research Continuity Handover Package</h1>
+            <p class="panel-subtitle">
+              Assemble approved, non-restricted records into a structured continuity package, publish as Principal Investigator, and record formal recipient acknowledgement.
+            </p>
+          </div>
+        </div>
+
+        <div class="split-grid" style="margin-bottom: 16px;">
+          <!-- Create Handover Package Card -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Assemble Handover Package (Approved Records Only)</h2>
+            </div>
+            <div id="handover-create-permission-note" class="permission-note hidden"></div>
+            <form id="form-create-handover" class="stack-form">
+              <div class="form-row">
+                <div class="form-field" style="flex: 2;">
+                  <label for="hnd-title">Handover Package Title *</label>
+                  <input id="hnd-title" type="text" placeholder="e.g., Solid-State Li-Garnet Continuity Package — Fall Handover" required />
+                </div>
+                <div class="form-field">
+                  <label for="hnd-recipient">Designated Recipient (`INCOMING_MEMBER`)</label>
+                  <select id="hnd-recipient"></select>
+                </div>
+              </div>
+              <div class="form-field">
+                <label>Select APPROVED Records to Bundle *</label>
+                <div id="hnd-approved-records-list" class="checkbox-grid"></div>
+              </div>
+              <div class="form-actions">
+                <button id="btn-create-handover" type="submit" class="btn btn-primary">Create Draft Handover Package</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Package Selector & Lifecycle Actions -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Handover Packages &amp; Sign-Off</h2>
+              <select id="handover-package-select" class="control-select" aria-label="Select Handover Package"></select>
+            </div>
+            <div id="handover-lifecycle-box" class="handover-lifecycle-box">
+              <div class="empty-state">No handover package selected yet.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 09: Optional Risk-Triggered Step-Up Verification Card -->
+        <div id="step-up-card" class="card" style="margin-bottom: 16px;">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Optional Step-Up Verification for Sensitive Actions (Stage 09)</h2>
+              <div class="text-xs text-muted">
+                Risk-triggered step-up for sensitive actions (`PUBLISH_HANDOVER_PACKAGE`, `ACCESS_RESTRICTED_SOURCE`). Equivalent non-camera MFA/passkey route is always available.
+              </div>
+            </div>
+            <span id="step-up-status-badge" class="badge badge-neutral">Optional · Not Active</span>
+          </div>
+          <div id="step-up-epistemic-notice" class="permission-note" style="margin-bottom: 10px;">
+            <strong>Honest Capability Notice:</strong> Browser camera permission only means a local camera stream was made available in the browser. It does <strong>NOT</strong> perform facial recognition, verify identity, prove who is present, or prove liveness. The authenticated session and MFA/passkey verification remain the actual security control. <strong>No images, video frames, or biometric data are recorded, uploaded, or stored.</strong>
+          </div>
+          <div id="step-up-camera-explanation" class="text-xs text-muted" style="margin-bottom: 10px;">
+            <strong>Why Camera Permission Is Requested (If Selected):</strong> Choosing the optional camera-assisted route opens a temporary, local-only browser video preview alongside your MFA/passkey check. You may cancel at any time or use the equivalent non-camera MFA/passkey route with zero loss of functionality.
+          </div>
+          <div class="form-row" style="align-items: flex-end;">
+            <div class="form-field">
+              <label for="step-up-action-select">Sensitive Action</label>
+              <select id="step-up-action-select">
+                <option value="PUBLISH_HANDOVER_PACKAGE">PUBLISH_HANDOVER_PACKAGE (PI Lead)</option>
+                <option value="ACCESS_RESTRICTED_SOURCE">ACCESS_RESTRICTED_SOURCE (PI Lead)</option>
+                <option value="APPROVE_SENSITIVE_RECORD">APPROVE_SENSITIVE_RECORD (PI / Reviewer)</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="step-up-route-select">Verification Route</label>
+              <select id="step-up-route-select">
+                <option value="NON_CAMERA_MFA_PASSKEY">Standard Non-Camera Route (MFA / Passkey Only)</option>
+                <option value="CAMERA_ASSISTED_MFA">Optional Camera-Assisted Route + MFA / Passkey</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="step-up-mfa-input">MFA / Passkey Code (Security Control) *</label>
+              <input id="step-up-mfa-input" type="password" value="654321" placeholder="Enter MFA code (Demo: 654321)" />
+            </div>
+            <div class="form-field" style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button id="btn-step-up-verify" type="button" class="btn btn-primary btn-sm">Verify Step-Up (MFA/Passkey)</button>
+              <button id="btn-step-up-cancel" type="button" class="btn btn-outline btn-sm">Cancel / Stop Stream</button>
+            </div>
+          </div>
+          <div id="step-up-result-box" class="permission-note hidden" style="margin-top: 10px;"></div>
+        </div>
+
+        <!-- Structured Handover Content Sections -->
+        <div id="handover-structured-view" class="handover-structured-view hidden">
+          <div class="handover-sections-grid">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">1. Current Status &amp; Verified Results</h3>
+                <span id="hnd-count-status" class="nav-count">0</span>
+              </div>
+              <div id="hnd-sec-status" class="handover-item-list"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">2. Decisions &amp; Experimental Protocols</h3>
+                <span id="hnd-count-decisions" class="nav-count">0</span>
+              </div>
+              <div id="hnd-sec-decisions" class="handover-item-list"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">3. Open Work &amp; Next Actions</h3>
+                <span id="hnd-count-open" class="nav-count">0</span>
+              </div>
+              <div id="hnd-sec-open" class="handover-item-list"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">4. Blockers, Risks, Gaps &amp; Dependencies</h3>
+                <span id="hnd-count-blockers" class="nav-count">0</span>
+              </div>
+              <div id="hnd-sec-blockers" class="handover-item-list"></div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 16px;">
+            <div class="card-header">
+              <h3 class="card-title">5. Owners, Contacts &amp; Provenance Verification Checklist</h3>
+              <span id="hnd-checklist-progress" class="mono-tag">0 / 0 checked</span>
+            </div>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Verify</th>
+                    <th>Type &amp; Title</th>
+                    <th>Owner</th>
+                    <th>Evidence Status</th>
+                    <th>Review State</th>
+                    <th>Exact Source Provenance Spans</th>
+                  </tr>
+                </thead>
+                <tbody id="hnd-checklist-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 7: ACTIVITY / AUDIT -->
+      <section id="view-audit" class="view-panel hidden" aria-labelledby="heading-audit">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Governance &amp; Traceability</div>
+            <h1 id="heading-audit" class="panel-title">Activity &amp; Security Audit Trail</h1>
+            <p class="panel-subtitle">
+              Append-only log of source uploads, pre-AI restricted data filtering, evidence verifications, review decisions, handover sign-offs, and RBAC access denials.
+            </p>
+          </div>
+        </div>
+
+        <div id="audit-permission-banner" class="permission-note hidden"></div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Recorded Audit Events</h2>
+            <span id="audit-events-count" class="text-muted text-xs">0 events</span>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Timestamp (UTC)</th>
+                  <th>Event Type</th>
+                  <th>Actor</th>
+                  <th>Role</th>
+                  <th>Target Entity</th>
+                  <th>Details / Filter Metadata</th>
+                </tr>
+              </thead>
+              <tbody id="audit-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

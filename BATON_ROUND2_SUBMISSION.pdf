@@ -1,0 +1,1067 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R 13 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Length 5820 >>
+stream
+q
+0.07 0.09 0.15 rg
+0 732 612 60 re f
+Q
+BT
+/F2 15 Tf
+1 1 1 rg
+1 0 0 1 36 764 Tm
+(BATON   Research Continuity Platform \(Round 2 Submission\)) Tj
+ET
+BT
+/F3 9 Tf
+0.8 0.86 0.95 rg
+1 0 0 1 36 746 Tm
+(Team Kernel   Connect -> Reconstruct -> Verify -> Review -> Handover   Verified: 2026-11-11) Tj
+ET
+BT
+/F2 11.5 Tf
+0.07 0.2 0.45 rg
+1 0 0 1 36 708 Tm
+(1. What Changed Since Round 1 \(Proposal -> Working Full-Stack Product\)) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 693 Tm
+(  Round 1 Baseline: Conceptual design proposal only \(Stage 00 audit confirmed zero application code in workspace\).) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 681 Tm
+(  Round 2 Shipped Implementation: Full-stack Node.js v22 + relational SQLite application \(7 SQL migrations, 19 tables\)) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 669 Tm
+(  and a 7-screen Vanilla HTML/CSS/JS workspace verified by 64/64 passing automated integration & E2E subtests.) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 657 Tm
+(  Stage 1 \(Connect\): Multi-format upload \(PDF, Markdown/Text, CSV, JSON\), exact PDF_PAGE / NOTE_SECTION / CSV_ROW /) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 645 Tm
+(  JSON_RECORD span indexing with character offsets, SHA-256 duplicate rejection \(409\), scanned PDF detection) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 633 Tm
+(  \(422 SCANNED_PDF_NEEDS_OCR\), and untrusted prompt-injection pattern flagging & sandboxing.) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 621 Tm
+(  Stage 2 \(Reconstruct\): Deterministic SQL pre-filtering of RESTRICTED_PI_ONLY sources before context construction,) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 609 Tm
+(  extraction of 11 continuity record types separating Direct Source Statement from AI Summary, null/UNKNOWN preservation) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 597 Tm
+(  for unstated owners/dates/rationale, and Continuity Map edges \(CONFLICTS_WITH, EVIDENCE_CORROBORATES, ADDRESSES_GAP\).) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 585 Tm
+(  Stage 3 \(Verify\): 6 canonical evidence states \(SUPPORTED, CONFLICTING, UNSUPPORTED, STALE, NEEDS REVIEW,) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 573 Tm
+(  NOT ESTABLISHED\), zero fabricated confidence percentages, side-by-side conflicting passages, and citation flagging.) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 561 Tm
+(  Stage 4 & 5 \(Review & Handover\): Outgoing researcher edits with field diffs, approval bound to record version,) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 549 Tm
+(  post-approval edit invalidation, 6-section Continuation Plan, and versioned recipient receipt acknowledgement.) Tj
+ET
+BT
+/F2 11.5 Tf
+0.07 0.2 0.45 rg
+1 0 0 1 36 531 Tm
+(2. Verified Deployment & Repository URLs \(Honest Status Disclosure\)) Tj
+ET
+q
+0.96 0.97 0.99 rg
+0.78 0.82 0.88 RG 0.8 w
+36 459 540 66 re B
+Q
+BT
+/F3 7.3 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 505 Tm
+(  Local Production Server URL : http://127.0.0.1:3000  \(Verified live: GET /api/health -> 200 OK, 7 migrations\)) Tj
+ET
+BT
+/F3 7.3 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 494.5 Tm
+(  External Public Cloud URL   : NOT DEPLOYED \(Built & verified inside offline local sandbox environment;) Tj
+ET
+BT
+/F3 7.3 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 484 Tm
+(                                turnkey Dockerfile and render.yaml with /var/data persistent disk included\).) Tj
+ET
+BT
+/F3 7.3 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 473.5 Tm
+(  GitHub Repository URL       : https://github.com/pournima-d/baton-research-continuity) Tj
+ET
+BT
+/F3 7.3 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 463 Tm
+(  Safe Demo Access Personas   : PI_LEAD \(tok_pi_lead_01\), RESEARCHER \(tok_researcher_01\), REVIEWER \(tok_reviewer_01\),) Tj
+ET
+BT
+/F3 7.3 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 452.5 Tm
+(                                INCOMING_MEMBER \(tok_incoming_01\), AUDITOR \(tok_auditor_01\)   zero privileged secrets.) Tj
+ET
+BT
+/F2 11.5 Tf
+0.07 0.2 0.45 rg
+1 0 0 1 36 441 Tm
+(3. System Architecture & Pre-AI Restricted Data Flow) Tj
+ET
+q
+0.98 0.99 1 rg
+0.75 0.8 0.88 RG 0.8 w
+36 319 540 114 re B
+Q
+BT
+/F3 7 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 413 Tm
+([1. Connect: PDF / Note / CSV / JSON] ---> Private Storage \(/storage/private_uploads\) + SQLite \(sources, source_spans\)) Tj
+ET
+BT
+/F3 7 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 403.8 Tm
+(       |) Tj
+ET
+BT
+/F3 7 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 394.6 Tm
+(       +---> Deterministic SQL Pre-Filter: WHERE visibility_level = "PROJECT_SHARED" AND exclude_from_ai = 0) Tj
+ET
+BT
+/F3 7 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 385.40000000000003 Tm
+(             \(RESTRICTED_PI_ONLY sources are excluded BEFORE extraction, summarisation, or handover assembly\)) Tj
+ET
+BT
+/F3 7 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 376.20000000000005 Tm
+(       |) Tj
+ET
+BT
+/F3 7 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 367.00000000000006 Tm
+([2. Reconstruct: aiReconstructor.js] ----> Candidate Records \(DRAFT\) + Evidence Links + Continuity Map Edges) Tj
+ET
+BT
+/F3 7 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 357.80000000000007 Tm
+(       |) Tj
+ET
+BT
+/F3 7 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 348.6000000000001 Tm
+([3. Verify: evidenceInspector.js] -------> SUPPORTED | CONFLICTING | UNSUPPORTED | STALE | NEEDS REVIEW | NOT ESTABLISHED) Tj
+ET
+BT
+/F3 7 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 339.4000000000001 Tm
+(       |) Tj
+ET
+BT
+/F3 7 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 330.2000000000001 Tm
+([4. Review: reviews & record_versions] --> APPROVE \(bound to version\) | REQUEST_CHANGES | FLAG_GAP | REJECT) Tj
+ET
+BT
+/F3 7 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 321.0000000000001 Tm
+(       |) Tj
+ET
+BT
+/F3 7 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 311.8000000000001 Tm
+([5. Handover: handoverService.js] -------> Published by PI_LEAD -> Role-Filtered View -> Receipt Acknowledged \(v1\)) Tj
+ET
+BT
+/F3 8 Tf
+0.4 0.45 0.5 rg
+1 0 0 1 36 24 Tm
+(BATON   Team Kernel   Round 2 Submission   Page 1 of 4) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 6728 >>
+stream
+q
+0.07 0.09 0.15 rg
+0 732 612 60 re f
+Q
+BT
+/F2 14 Tf
+1 1 1 rg
+1 0 0 1 36 764 Tm
+(BATON   Actual Product Workspace Captures & Shipped Workflow) Tj
+ET
+BT
+/F3 9 Tf
+0.8 0.86 0.95 rg
+1 0 0 1 36 746 Tm
+(Captured directly from running application state \(docs/screenshots/01..03.svg\)) Tj
+ET
+q
+0.97 0.98 0.99 rg
+0.7 0.76 0.84 RG 0.8 w
+36 520 540 194 re B
+Q
+q
+0.12 0.16 0.24 rg
+36 692 540 22 re f
+Q
+BT
+/F2 9 Tf
+1 1 1 rg
+1 0 0 1 46 700 Tm
+(Workspace Capture 1: Stage 00 Overview & Stage 01 Connect \(docs/screenshots/01_overview_and_connect.svg\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 676 Tm
+(Project: Solid-State Li-Garnet \(LLZO\) Electrolyte Interface Continuity \(prj_solidstate_01\) | Role: PI_LEAD) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 663.8 Tm
+(Metrics: 4 Ingested Sources \(3 PROJECT_SHARED, 1 RESTRICTED_PI_ONLY\) | 10 Provenance Spans | 3 Seeded Records) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 651.5999999999999 Tm
+(----------------------------------------------------------------------------------------------------------------) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 639.3999999999999 Tm
+(SOURCE ID        TYPE           VISIBILITY           STATUS   INDEXED PROVENANCE LOCATORS) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 627.1999999999998 Tm
+(src_pdf_01       PDF_DOCUMENT   PROJECT_SHARED       READY    4 spans \(PDF_PAGE: Page 1..2, char offsets 0..762\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 614.9999999999998 Tm
+(src_note_01      LAB_NOTE       PROJECT_SHARED       READY    2 spans \(NOTE_SECTION: Argon Purge & Drift Log\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 602.7999999999997 Tm
+(src_csv_01       CSV_DATASET    PROJECT_SHARED       READY    4 spans \(CSV_ROW: Samples SSE-01 to SSE-04\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 590.5999999999997 Tm
+(src_restricted   LAB_NOTE       RESTRICTED_PI_ONLY   READY    1 span  \(Excluded from AI & non-PI roles\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 578.3999999999996 Tm
+(----------------------------------------------------------------------------------------------------------------) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 566.1999999999996 Tm
+(Sample Span [spn_pdf01_01] \(Page 1, Paragraph 1\): "Objective: Achieve >93% relative density and >0.60 mS/cm) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 553.9999999999995 Tm
+(room-temperature ionic conductivity in Ta-doped Li7La3Zr2O12 \(LLZO\) solid electrolyte pellets...") Tj
+ET
+q
+0.97 0.98 0.99 rg
+0.7 0.76 0.84 RG 0.8 w
+36 294 540 212 re B
+Q
+q
+0.12 0.16 0.24 rg
+36 484 540 22 re f
+Q
+BT
+/F2 9 Tf
+1 1 1 rg
+1 0 0 1 46 492 Tm
+(Workspace Capture 2: Stage 02 Continuity Map & Stage 03 Evidence Inspector \(02_continuity_map_and_verify.svg\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 468 Tm
+(  Node [DECISION   rec_seed_01]: Switch from Alumina to MgO Crucibles | Evidence: SUPPORTED | Approval: APPROVED \(v1\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 452.5 Tm
+(  - Direct Source Statement : "Switched crucible setup from bare alumina to MgO crucibles with mother-powder...") Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 437 Tm
+(  - AI Summary / Inference  : Standardized MgO crucible protocol raised pellet density to 94.2% \(0.68 mS/cm\).) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 421.5 Tm
+(  - Model Disclosure        : provider=baton-local-deterministic | model=heuristic-span-reconstructor-v2 \(v2.5.0\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 406 Tm
+(  Conflicting Pair Detected : Sample SSE-09 conductivity \(2026-09-10: 0.72 mS/cm\) vs \(2026-09-18: 0.31 mS/cm\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 390.5 Tm
+(  - Edge: CONFLICTS_WITH | Both passages displayed side-by-side without choosing a winner automatically.) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 375 Tm
+(  Stale Calibration Flagged : EQ-PRESSURE-01 \(2026-07-01\) marked STALE relative to 2026-10-15 recalibration log.) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 359.5 Tm
+(  Missing Owner Preserved   : Task TSK-102 owner=null, due_date=null -> flagged is_incomplete=1 \(never fabricated\).) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 344 Tm
+(  Epistemic Citation Notice : "A citation shows where a claim came from; it does not prove the claim is true.") Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 328.5 Tm
+(  Accessible Map Toggle     : #continuity-map-table-card provides a full semantic HTML table alternative.) Tj
+ET
+q
+0.97 0.98 0.99 rg
+0.7 0.76 0.84 RG 0.8 w
+36 56 540 224 re B
+Q
+q
+0.12 0.16 0.24 rg
+36 258 540 22 re f
+Q
+BT
+/F2 9 Tf
+1 1 1 rg
+1 0 0 1 46 266 Tm
+(Workspace Capture 3: Stage 04 Review, Stage 05 Handover & Stage 08 Audit Trail \(03_review_handover_and_audit.svg\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 242 Tm
+(  Governance Invariant      : Editing an APPROVED record creates v\(N+1\), resets to PENDING_REVIEW, invalidates approval.) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 226.5 Tm
+(  Continuation Plan \(v1\)    : Generated from APPROVED records only \(restricted_sources_excluded_count: 1\):) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 211 Tm
+(  1. Current Status         : 3 Approved Records | 0 Rejected/Draft | 1 Restricted PI-Only source excluded server-side) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 195.5 Tm
+(  2. Approved Decisions     : Switch to MgO Crucibles with Mother-Powder Bed \(Approved v1 by Dr. Priya Nair\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 180 Tm
+(  3. Open Tasks & Next Steps: TSK-102 Owner: UNKNOWN \(Not stated in source\) | Deadline: UNKNOWN \(No deadline stated\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 164.5 Tm
+(  4. Blockers, Risks & Gaps : High-current \(>0.8 mA/cm2\) interfacial voiding & H2O analyzer drift \(+1.8 ppm\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 149 Tm
+(  Recipient Acknowledgement : Aria Patel \(INCOMING_MEMBER\) checked all items -> status: ACKNOWLEDGED \(v1\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 133.5 Tm
+(  - Disclaimer: "Acknowledgement means receipt, not agreement or proof of understanding.") Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 118 Tm
+(  Append-Only Audit Events  : PROJECT_CREATED, SOURCE_UPLOADED, UNTRUSTED_PROMPT_PATTERN_SANDBOXED,) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 102.5 Tm
+(  AI_CONTEXT_FILTERED, RECONSTRUCTION_COMPLETED, RECORD_VERIFIED, RECORD_EDITED, REVIEW_SUBMITTED,) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 87 Tm
+(  HANDOVER_CREATED, HANDOVER_PUBLISHED, HANDOVER_ACKNOWLEDGED, ACCESS_DENIED \(Immutable via HTTP 405 & SQLite triggers\).) Tj
+ET
+BT
+/F3 8 Tf
+0.4 0.45 0.5 rg
+1 0 0 1 36 24 Tm
+(BATON   Team Kernel   Round 2 Submission   Page 2 of 4) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 6778 >>
+stream
+q
+0.07 0.09 0.15 rg
+0 732 612 60 re f
+Q
+BT
+/F2 14 Tf
+1 1 1 rg
+1 0 0 1 36 764 Tm
+(BATON   Disclosures, Security Matrix \(64/64 Tests\) & Limitations) Tj
+ET
+BT
+/F3 9 Tf
+0.8 0.86 0.95 rg
+1 0 0 1 36 746 Tm
+(Full transparency on APIs, models, libraries, test evidence, camera step-up, and limitations) Tj
+ET
+BT
+/F2 11 Tf
+0.07 0.2 0.45 rg
+1 0 0 1 36 710 Tm
+(4. Technical & AI Disclosures \(DISCLOSURES.md\)) Tj
+ET
+BT
+/F1 8.6 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 696 Tm
+(  Runtime & Database : Node.js v22.14.0 built-in modules \(node:http, node:sqlite, node:crypto, node:test, node:vm\).) Tj
+ET
+BT
+/F1 8.6 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 684.2 Tm
+(                       Zero third-party npm packages \(0 external node_modules\). SQLite 3.x with WAL & FK enforcement.) Tj
+ET
+BT
+/F1 8.6 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 672.4000000000001 Tm
+(  Extraction Engine  : First-party deterministic structured span reconstructor \(baton-local-deterministic /) Tj
+ET
+BT
+/F1 8.6 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 660.6000000000001 Tm
+(                       heuristic-span-reconstructor-v2 v2.5.0\); optional GEMINI_API_KEY \(gemini-2.5-flash\) config hook.) Tj
+ET
+BT
+/F1 8.6 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 648.8000000000002 Tm
+(  UI & Templates     : 100% custom-authored HTML5, CSS3, and Vanilla ES6 JS \(public/\). No third-party UI templates.) Tj
+ET
+BT
+/F1 8.6 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 637.0000000000002 Tm
+(  AI Coding Assistant: Google DeepMind Antigravity used for pair-programming implementation & test execution.) Tj
+ET
+BT
+/F2 11 Tf
+0.07 0.2 0.45 rg
+1 0 0 1 36 619.2000000000003 Tm
+(5. Automated Test Suites \(64/64 PASS\) & Stage 08 Security Test Matrix \(TEST_REPORT.md\)) Tj
+ET
+q
+0.97 0.98 0.99 rg
+0.75 0.8 0.88 RG 0.8 w
+36 427.2000000000003 540 184 re B
+Q
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 593.2000000000003 Tm
+(SUITE / SECURITY MATRIX ITEM                       OBSERVED RESULT & EVIDENCE) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 580.2000000000003 Tm
+(-------------------------------------------------------------------------------------------------------------) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 567.2000000000003 Tm
+(1. Unauthorised project access                     PASS   401 UNAUTHENTICATED & 403 FORBIDDEN_ROLE \(tok_outsider_01\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 554.2000000000003 Tm
+(2. Collaborator attempts to approve                PASS   RESEARCHER blocked \(403 FORBIDDEN_ROLE / APPROVAL_BYPASS\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 541.2000000000003 Tm
+(3. Recipient requests restricted source            PASS   403 RESTRICTED_RESOURCE on src_restricted_01 \(/spans, /file\)) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 528.2000000000003 Tm
+(4. Restricted text absent from AI input            PASS   SQL pre-filter excludes restricted sources; 0 canary leakage) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 515.2000000000003 Tm
+(5. Guessed source/file ID & direct /storage/*      PASS   404 RESOURCE_NOT_FOUND & 403 FORBIDDEN_STORAGE_PATH) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 502.2000000000003 Tm
+(6. Cross-project evidence ID                       PASS   422 CROSS_PROJECT_EVIDENCE_VIOLATION across all endpoints) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 489.2000000000003 Tm
+(7. Malformed, empty, oversized & scanned uploads   PASS   400/413/422; scanned PDF marked NEEDS_OCR honestly) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 476.2000000000003 Tm
+(8. Prompt-injection text inside source             PASS   Flagged \(has_prompt_injection_pattern=1\), stripped, DRAFT only) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 463.2000000000003 Tm
+(9. Audit event generated & append-only immutability PASS   All denials logged; HTTP 405 & SQLite triggers block edits) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 450.2000000000003 Tm
+(10. Sessions, scrypt, CSRF, CORS, Rate Limits      PASS   HttpOnly/SameSite=Strict/Secure, 403 CSRF/CORS, 429 rate limit) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 437.2000000000003 Tm
+(11. DB Restart Persistence & Model Timeout \(504\)   PASS   State persists across DB close/reopen; 0 partial records on 504) Tj
+ET
+BT
+/F2 11 Tf
+0.07 0.2 0.45 rg
+1 0 0 1 36 411.2000000000003 Tm
+(6. Honest Stage 09 Camera Step-Up Status) Tj
+ET
+BT
+/F1 8.5 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 397.2000000000003 Tm
+(  Optional & Risk-Triggered: Implemented for sensitive actions \(PUBLISH_HANDOVER_PACKAGE, ACCESS_RESTRICTED_SOURCE\)) Tj
+ET
+BT
+/F1 8.5 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 385.7000000000003 Tm
+(  with a first-class, equivalent Non-Camera Route \(NON_CAMERA_MFA_PASSKEY\) as the recommended default.) Tj
+ET
+BT
+/F1 8.5 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 374.2000000000003 Tm
+(  Honest Capability Disclaimer: Browser camera permission only means a local stream was made available. It does NOT) Tj
+ET
+BT
+/F1 8.5 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 362.7000000000003 Tm
+(  perform facial recognition, verify identity, prove who is present, or prove liveness. The authenticated session and) Tj
+ET
+BT
+/F1 8.5 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 351.2000000000003 Tm
+(  MFA/passkey verification remain the actual security control \(camera stream without valid MFA is rejected with 401\).) Tj
+ET
+BT
+/F1 8.5 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 339.7000000000003 Tm
+(  Zero Media / Biometric Storage: Enforced by SQLite CHECK \(media_stored = 0\) and 400 MEDIA_UPLOAD_PROHIBITED.) Tj
+ET
+BT
+/F1 8.5 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 328.2000000000003 Tm
+(  All Error States Tested: PERMISSION_DENIED, NO_DEVICE, UNSUPPORTED_BROWSER, CANCELLED, and DEVICE_ERROR tested in) Tj
+ET
+BT
+/F1 8.5 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 316.7000000000003 Tm
+(  tests/camera_step_up_stage09.test.js \(6/6 PASS\). Physical webcam capture in a GUI browser is marked NOT VERIFIED.) Tj
+ET
+BT
+/F2 11 Tf
+0.07 0.2 0.45 rg
+1 0 0 1 36 299.2000000000003 Tm
+(7. Documented Security & Product Limitations \(SECURITY_NOTES.md\)) Tj
+ET
+BT
+/F1 8.5 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 285.2000000000003 Tm
+(  Local Disk Storage: SQLite \(data/baton.db\) and private blobs are unencrypted at rest on the host OS filesystem.) Tj
+ET
+BT
+/F1 8.5 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 273.7000000000003 Tm
+(  In-Memory Rate Limiter: Rate limit counters reside in process memory; multi-node scaling requires Redis.) Tj
+ET
+BT
+/F1 8.5 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 262.2000000000003 Tm
+(  Heuristic Prompt-Injection Stripping: Strips override/tool patterns, but human verification & review remain mandatory.) Tj
+ET
+BT
+/F1 8.5 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 250.70000000000027 Tm
+(  Scanned PDF OCR: Scanned PDFs without text streams are flagged NEEDS_OCR; external OCR is not bundled in Round 2.) Tj
+ET
+BT
+/F3 8 Tf
+0.4 0.45 0.5 rg
+1 0 0 1 36 24 Tm
+(BATON   Team Kernel   Round 2 Submission   Page 3 of 4) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 6409 >>
+stream
+q
+0.07 0.09 0.15 rg
+0 732 612 60 re f
+Q
+BT
+/F2 14 Tf
+1 1 1 rg
+1 0 0 1 36 764 Tm
+(BATON   Round 3 Commitments, Contributions & 3-Minute Demo Script) Tj
+ET
+BT
+/F3 9 Tf
+0.8 0.86 0.95 rg
+1 0 0 1 36 746 Tm
+(Exactly three Round 3 commitments   Actual team contributions   Judge demo walkthrough) Tj
+ET
+BT
+/F2 11.5 Tf
+0.07 0.2 0.45 rg
+1 0 0 1 36 708 Tm
+(8. Three Round 3 Commitments \(Not Claimed as Shipped Round 2 Features\)) Tj
+ET
+q
+0.96 0.98 1 rg
+0.7 0.78 0.9 RG 0.8 w
+36 552 540 148 re B
+Q
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 678 Tm
+(A. Knowledge-Debt Radar:) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 666.2 Tm
+(   Identify critical project knowledge concentrated in a single person \(stated_owner concentration\) or weakly) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 654.4000000000001 Tm
+(   documented \(UNSUPPORTED, NEEDS REVIEW, STALE, or missing rationale/owner\), producing prioritised gap alerts.) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 642.6000000000001 Tm
+() Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 630.8000000000002 Tm
+(B. Cold-Start Handover Test:) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 619.0000000000002 Tm
+(   Practical newcomer questions test whether the approved handover record can answer essential operational and) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 607.2000000000003 Tm
+(   experimental questions   reporting record and documentation gaps in the package, never a person's competence.) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 595.4000000000003 Tm
+() Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 583.6000000000004 Tm
+(C. Sensitive-Content Detection and Redaction:) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 571.8000000000004 Tm
+(   Detect likely email addresses, keys/tokens, and personal data in uploaded sources and draft records, suggesting) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 560.0000000000005 Tm
+(   redactions for explicit human confirmation before sharing or bundling into a handover package.) Tj
+ET
+BT
+/F2 11.5 Tf
+0.07 0.2 0.45 rg
+1 0 0 1 36 528 Tm
+(9. Actual Team Contributions \(CONTRIBUTIONS.md\)) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 513 Tm
+(  Team Kernel \(Pournima   Project Lead & Architect\):) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 501 Tm
+(  Formulated the Round 1 research continuity problem and 5-stage governance workflow; directed the 12-stage Round 2) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 489 Tm
+(  build, security architecture, epistemic evidence rules, and stage-by-stage verification acceptance checks.) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 477 Tm
+(  AI Pair-Programming Assistant \(Google DeepMind Antigravity\):) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 465 Tm
+(  Paired with the user to implement the Node.js/SQLite backend, 7 migrations, 7-screen frontend workspace, 9 automated) Tj
+ET
+BT
+/F1 8.8 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 36 453 Tm
+(  test suites \(64/64 passing\), security controls, and Round 2 documentation.) Tj
+ET
+BT
+/F2 11.5 Tf
+0.07 0.2 0.45 rg
+1 0 0 1 36 433 Tm
+(10. Judge-Facing Three-Minute Demo Script \(Verified Working Features Only\)) Tj
+ET
+q
+0.98 0.98 0.99 rg
+0.78 0.8 0.85 RG 0.8 w
+36 210 540 214 re B
+Q
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 404 Tm
+(  0:00 - 0:45 | Stage 1 \(Connect\) & Role-Based Source Visibility:) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 393.4 Tm
+(  1. Open http://127.0.0.1:3000 as RESEARCHER \(Marcus Chen\). Show live SQLite metrics on Overview.) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 382.79999999999995 Tm
+(  2. Open "01 Sources": inspect 3 PROJECT_SHARED sources \(PDF, Markdown Note, CSV\). Switch role to PI_LEAD) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 372.19999999999993 Tm
+(     \(Dr. Elena Vance\) to reveal "src_restricted_01" \(RESTRICTED_PI_ONLY\).) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 361.5999999999999 Tm
+(  3. Click "Inspect Spans" on llzo_sintering_report.pdf to show exact PDF_PAGE locators and character offsets.) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 350.9999999999999 Tm
+() Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 340.39999999999986 Tm
+(  0:45 - 1:45 | Stage 2 \(Reconstruct\) & Stage 3 \(Verify Evidence & Gaps\):) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 329.79999999999984 Tm
+(  4. Open "02 Continuity Map" as RESEARCHER and run Pre-Filtered Reconstruction. Point out the filter summary:) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 319.1999999999998 Tm
+(     "Restricted/AI-Excluded Sources Filtered Out: 1" \(restricted text never entered extraction context\).) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 308.5999999999998 Tm
+(  5. Toggle "Table View \(Accessible\)" to show the keyboard/screen-reader table alternative and Continuity Edges.) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 297.9999999999998 Tm
+(  6. Open "03 Records & Evidence": inspect separated Direct Source Statement vs AI Summary, model disclosure,) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 287.39999999999975 Tm
+(     and the 6 canonical evidence states. Click "Flag Incorrect Citation" to see automatic downgrade from SUPPORTED.) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 276.7999999999997 Tm
+() Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 266.1999999999997 Tm
+(  1:45 - 3:00 | Stage 4 \(Review\), Stage 5 \(Handover\) & Append-Only Audit Trail:) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 255.5999999999997 Tm
+(  7. Switch to REVIEWER \(Dr. Priya Nair\) in "04 Review Queue" and APPROVE a record \(bound to version, preserving) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 244.99999999999972 Tm
+(     evidence_status\). Show that editing an approved record resets it to PENDING_REVIEW.) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 234.39999999999972 Tm
+(  8. In "05 Handover", publish as PI_LEAD \(showing optional Non-Camera MFA Step-Up\), then switch to INCOMING_MEMBER) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 223.79999999999973 Tm
+(     \(Aria Patel\), verify restricted content is absent, check all items, and click "Acknowledge Receipt".) Tj
+ET
+BT
+/F3 7.1 Tf
+0.15 0.18 0.22 rg
+1 0 0 1 46 213.19999999999973 Tm
+(  9. Switch to AUDITOR \(Jordan Lee\) in "06 Activity / Audit" to inspect the immutable audit_events trail.) Tj
+ET
+BT
+/F3 8 Tf
+0.4 0.45 0.5 rg
+1 0 0 1 36 24 Tm
+(BATON   Team Kernel   Round 2 Submission   Page 4 of 4) Tj
+ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 12 0 R >>
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000135 00000 n 
+0000000232 00000 n 
+0000000334 00000 n 
+0000000429 00000 n 
+0000006301 00000 n 
+0000006447 00000 n 
+0000013227 00000 n 
+0000013373 00000 n 
+0000020204 00000 n 
+0000020352 00000 n 
+0000026814 00000 n 
+trailer
+<< /Size 14 /Root 1 0 R >>
+startxref
+26962
+%%EOF

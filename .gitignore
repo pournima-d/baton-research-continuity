@@ -1,0 +1,21 @@
+# Environment variables & secrets (never commit)
+.env
+.env.*
+!.env.example
+
+# Private file uploads & local relational database files
+storage/
+data/*.db
+data/*.db-shm
+data/*.db-wal
+*.sqlite
+*.sqlite3
+
+# Local portable runtime & dependencies
+.runtime/
+node_modules/
+
+# Logs & OS files
+*.log
+.DS_Store
+Thumbs.db

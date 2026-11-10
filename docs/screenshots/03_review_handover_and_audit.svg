@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#f4f6f8"/>
+  <rect x="0" y="0" width="960" height="48" fill="#111827"/>
+  <text x="20" y="30" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold">BATON / Stage 4 Review, Stage 5 Handover &amp; Stage 8 Append-Only Audit</text>
+  <rect x="640" y="12" width="300" height="24" rx="4" fill="#065f46"/>
+  <text x="652" y="28" fill="#d1fae5" font-family="monospace" font-size="11">Handover v1: ACKNOWLEDGED by Recipient</text>
+
+  <!-- Top Half: Role-Filtered Continuation Plan & Step-Up -->
+  <rect x="20" y="64" width="920" height="230" rx="4" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="36" y="90" fill="#111827" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold">Role-Filtered Continuation Plan (Approved Records Only · Restricted Sources Excluded: 1)</text>
+  <text x="36" y="112" fill="#374151" font-family="monospace" font-size="11">1. Current Status     : 3 Approved Records bundled · 0 Rejected/Draft · 1 Restricted PI-Only source excluded server-side</text>
+  <text x="36" y="132" fill="#374151" font-family="monospace" font-size="11">2. Approved Decisions : Switch to MgO Crucibles with Mother-Powder Bed (Approved v1 by Dr. Priya Nair)</text>
+  <text x="36" y="152" fill="#374151" font-family="monospace" font-size="11">3. Open Tasks         : Verify Argon purifier catalyst schedule — Owner: UNKNOWN · Deadline: UNKNOWN (Never invented)</text>
+  <text x="36" y="172" fill="#374151" font-family="monospace" font-size="11">4. Blockers &amp; Risks   : High-current (&gt;0.8 mA/cm2) interfacial voiding &amp; H2O sensor drift (+1.8 ppm)</text>
+  <text x="36" y="192" fill="#065f46" font-family="monospace" font-size="11">5. Recipient Receipt  : ACKNOWLEDGED by Aria Patel (INCOMING_MEMBER) · Type: RECEIPT_ONLY_NOT_AGREEMENT_OR_UNDERSTANDING</text>
+
+  <rect x="36" y="208" width="888" height="72" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="48" y="228" fill="#1e293b" font-family="Segoe UI, Arial, sans-serif" font-size="11.5" font-weight="bold">Stage 09 Optional Step-Up Verification: Standard Non-Camera Route (NON_CAMERA_MFA_PASSKEY) Active</text>
+  <text x="48" y="246" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="11">Honest Disclosure: Browser camera permission only opens a local stream. It does NOT verify identity, prove presence, or prove</text>
+  <text x="48" y="264" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="11">liveness. Authenticated session + MFA/passkey remain the security control. Media Stored: 0 (CHECK media_stored = 0).</text>
+
+  <!-- Bottom Half: Append-Only Audit Events -->
+  <rect x="20" y="310" width="920" height="210" rx="4" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="36" y="336" fill="#111827" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold">Append-Only Security &amp; Governance Audit Log (Enforced via HTTP 405 &amp; SQLite Triggers)</text>
+  <line x1="20" y1="348" x2="940" y2="348" stroke="#e5e7eb"/>
+  <text x="36" y="368" fill="#4b5563" font-family="monospace" font-size="11" font-weight="bold">EVENT TYPE                           ACTOR &amp; ROLE                  TARGET            METADATA / SECURITY EVIDENCE</text>
+  <text x="36" y="390" fill="#111827" font-family="monospace" font-size="11">AI_CONTEXT_FILTERED                  Marcus Chen (RESEARCHER)      prj_solidstate    excluded_restricted_count: 1</text>
+  <text x="36" y="410" fill="#111827" font-family="monospace" font-size="11">UNTRUSTED_PROMPT_PATTERN_SANDBOXED   Marcus Chen (RESEARCHER)      SOURCE            TREATED_AS_LITERAL_DOCUMENT_CONTENT</text>
+  <text x="36" y="430" fill="#111827" font-family="monospace" font-size="11">REVIEW_SUBMITTED                     Dr. Priya Nair (REVIEWER)     REVIEW            decision: APPROVE, approved_version: 2</text>
+  <text x="36" y="450" fill="#111827" font-family="monospace" font-size="11">HANDOVER_PUBLISHED                   Dr. Elena Vance (PI_LEAD)     HANDOVER          version_number: 1, status: PUBLISHED</text>
+  <text x="36" y="470" fill="#065f46" font-family="monospace" font-size="11">HANDOVER_ACKNOWLEDGED                Aria Patel (INCOMING_MEMBER)  HANDOVER          RECEIPT_ONLY_NOT_AGREEMENT</text>
+  <text x="36" y="490" fill="#991b1b" font-family="monospace" font-size="11">ACCESS_DENIED                        Aria Patel (INCOMING_MEMBER)  src_restricted    reason: RESTRICTED_PI_ONLY_SOURCE</text>
+</svg>

@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: baton-research-continuity
+    runtime: node
+    plan: starter
+    buildCommand: echo "Zero external npm dependencies required (Node.js v22 built-in modules)"
+    startCommand: node server/index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 3000
+      - key: DB_PATH
+        value: /var/data/baton.db
+      - key: PRIVATE_STORAGE_DIR
+        value: /var/data/private_uploads
+      - key: AUTO_SEED_IF_EMPTY
+        value: "true"
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+    disk:
+      name: baton-persistent-data
+      mountPath: /var/data
+      sizeGB: 1
