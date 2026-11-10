@@ -23,10 +23,11 @@ function startServer() {
     }
   }
 
+  const appliedCount = migResult.totalMigrations ?? (migResult.newlyApplied?.length ?? 0) + (migResult.alreadyApplied?.length ?? 0);
   const server = createApp(db);
   server.listen(cfg.port, cfg.host, () => {
     console.log(`[BATON Server] Listening on http://${cfg.host}:${cfg.port}`);
-    console.log(`[BATON Server] Database: ${cfg.dbPath} (${migResult.applied.length} migrations active)`);
+    console.log(`[BATON Server] Database: ${cfg.dbPath} (${appliedCount} migrations active)`);
     console.log(`[BATON Server] Private Storage: ${cfg.privateStorageDir}`);
   });
 
