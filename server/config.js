@@ -31,13 +31,16 @@ function getConfig(overrides = {}) {
     .split(',')
     .map((s) => s.trim())
     .filter(Boolean);
+  if (process.env.RENDER_EXTERNAL_URL) {
+    extraOrigins.push(process.env.RENDER_EXTERNAL_URL.trim().replace(/\/+$/, ''));
+  }
   const allowedOrigins = Array.from(
     new Set(['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost', ...extraOrigins])
   );
   return {
     rootDir: ROOT_DIR,
     port: Number(overrides.port ?? process.env.PORT ?? 3000),
-    host: overrides.host || process.env.HOST || '127.0.0.1',
+    host: overrides.host || process.env.HOST || '0.0.0.0',
     dbPath: path.isAbsolute(dbPathRaw) ? dbPathRaw : path.resolve(ROOT_DIR, dbPathRaw),
     privateStorageDir: path.isAbsolute(storageDirRaw) ? storageDirRaw : path.resolve(ROOT_DIR, storageDirRaw),
     maxUploadBytes: Number(overrides.maxUploadBytes ?? process.env.MAX_UPLOAD_BYTES ?? 2 * 1024 * 1024),

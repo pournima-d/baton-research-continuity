@@ -194,6 +194,11 @@ function createApp(customDb = null) {
       if (origin) {
         const cfg = getConfig();
         const allowedOrigins = new Set(cfg.allowedOrigins);
+        const hostHeader = req.headers && (req.headers['host'] || req.headers['Host']);
+        if (hostHeader) {
+          allowedOrigins.add(`http://${hostHeader}`);
+          allowedOrigins.add(`https://${hostHeader}`);
+        }
         if (!allowedOrigins.has(origin)) {
           logAuditEvent(db, {
             projectId: null,

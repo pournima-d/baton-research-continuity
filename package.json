@@ -9,6 +9,7 @@
     "migrate:clean": "node server/db/migrate.js --clean",
     "seed": "node server/db/seed.js",
     "setup": "node server/db/migrate.js --clean && node server/db/seed.js",
+    "build": "node server/db/migrate.js --clean && node server/db/seed.js",
     "start": "node server/index.js",
     "test": "node --test tests/backend.test.js tests/frontend.test.js tests/connect_ingestion.test.js tests/reconstruct_stage05.test.js tests/verify_stage06.test.js tests/review_handover_stage07.test.js tests/security_audit_stage08.test.js tests/camera_step_up_stage09.test.js tests/e2e_reliability_stage10.test.js"
   },
